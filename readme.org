@@ -1,0 +1,7 @@
+#+TITLE: dmpc security
+
+Some exploratory studies about security in dmpc frameworks
+
+* Requirements
+- =cvxopt=
+- =numpy=
