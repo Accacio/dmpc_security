@@ -1,0 +1,57 @@
+#+title: QP
+#+PROPERTY: header-args:python :tangle ../../src/dmpc_security/qp.py :comments yes
+
+* TL;DR
+This is a wrapper for the qp function on cvxopt in order to use numpy arrays instead of cvxopt matrix types
+
+* CODE
+#+begin_src python
+#!/usr/bin/env python3
+#+end_src
+
+#+begin_src python
+from cvxopt import matrix
+from cvxopt import solvers
+from numpy import array,ndarray
+from dataclasses import dataclass
+#+end_src
+
+#+begin_src python
+__all__ = ["QP_result","solve"]
+#+end_src
+
+Here we define a struct using numpy arrays and better variable names
+#+begin_src python :export yes
+@dataclass
+class QP_result:
+    primal: ndarray
+    dual: ndarray
+    lagrangian_eq: ndarray
+    lagrangian_ineq: ndarray
+
+def solve(Q,p,G=None,h=None,A=None,b=None):
+    #+end_src
+Here we convert to cvxopt matrix type if needed
+#+begin_src python :export yes
+    Q = matrix(Q) if Q is not None else None
+    p = matrix(p) if p is not None else None
+    G = matrix(G) if G is not None else None
+    h = matrix(h) if h is not None else None
+    A = matrix(A) if A is not None else None
+    b = matrix(b) if b is not None else None
+#+end_src
+
+#+begin_src python :export yes
+    solvers.options['show_progress'] = False
+
+    sol=solvers.qp(Q, p, G, h, A, b)
+    #+end_src
+
+And we return our structure
+    #+begin_src python :export yes
+    primal = array(sol['x'])
+    dual = array(sol['y'])
+    lagrangian_eq = array(sol['y'])
+    lagrangian_ineq = array(sol['z'])
+    return QP_result(primal,dual,lagrangian_eq,lagrangian_ineq)
+#+end_src
