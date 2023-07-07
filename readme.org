@@ -3,5 +3,4 @@
 Some exploratory studies about security in dmpc frameworks
 
 * Requirements
-- =cvxopt=
-- =numpy=
+- Requirements are listed in =requirements.txt= and can be installed via =pip install=
