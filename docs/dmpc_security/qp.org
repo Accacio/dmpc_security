@@ -1,7 +1,6 @@
 #+title: QP
 #+PROPERTY: header-args:python :tangle ../../src/dmpc_security/qp.py :comments yes
 
-* TL;DR
 This is a wrapper for the qp function on cvxopt in order to use numpy arrays instead of cvxopt matrix types
 
 * CODE
@@ -29,8 +28,12 @@ class QP_result:
     lagrangian_eq: ndarray
     lagrangian_ineq: ndarray
 
+#+end_src
+
+The wrapper itself
+#+begin_src python :export yes
 def solve(Q,p,G=None,h=None,A=None,b=None):
-    #+end_src
+#+end_src
 Here we convert to cvxopt matrix type if needed
 #+begin_src python :export yes
     Q = matrix(Q) if Q is not None else None
@@ -45,10 +48,10 @@ Here we convert to cvxopt matrix type if needed
     solvers.options['show_progress'] = False
 
     sol=solvers.qp(Q, p, G, h, A, b)
-    #+end_src
+#+end_src
 
 And we return our structure
-    #+begin_src python :export yes
+#+begin_src python :export yes
     primal = array(sol['x'])
     dual = array(sol['y'])
     lagrangian_eq = array(sol['y'])
