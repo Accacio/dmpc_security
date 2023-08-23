@@ -4,3 +4,11 @@ Some exploratory studies about security in dmpc frameworks
 
 * Requirements
 - Requirements are listed in =requirements.txt= and can be installed via =pip install=
+
+* Development
+Makefile targets were created:
+- venv :: create virtual environment
+- tests :: to run test sessions
+- install :: install package
+- uninstall :: remove package
+- install_editable :: install package for development
