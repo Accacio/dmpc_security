@@ -4,3 +4,4 @@
 # import dmpc_security.qp
 
 from  dmpc_security.qp import *
+from  dmpc_security.thermal_models import *

@@ -20,29 +20,31 @@ class QP_result:
     dual: ndarray
     lagrangian_eq: ndarray
     lagrangian_ineq: ndarray
-
-def solve(Q,p,G=None,h=None,A=None,b=None):
 # CODE:4 ends here
 
 # [[file:../../docs/dmpc_security/qp.org::*CODE][CODE:5]]
+def solve(Q,p,G=None,h=None,A=None,b=None):
+# CODE:5 ends here
+
+# [[file:../../docs/dmpc_security/qp.org::*CODE][CODE:6]]
     Q = matrix(Q) if Q is not None else None
     p = matrix(p) if p is not None else None
     G = matrix(G) if G is not None else None
     h = matrix(h) if h is not None else None
     A = matrix(A) if A is not None else None
     b = matrix(b) if b is not None else None
-# CODE:5 ends here
-
-# [[file:../../docs/dmpc_security/qp.org::*CODE][CODE:6]]
-    solvers.options['show_progress'] = False
-
-    sol=solvers.qp(Q, p, G, h, A, b)
 # CODE:6 ends here
 
 # [[file:../../docs/dmpc_security/qp.org::*CODE][CODE:7]]
+    solvers.options['show_progress'] = False
+
+    sol=solvers.qp(Q, p, G, h, A, b)
+# CODE:7 ends here
+
+# [[file:../../docs/dmpc_security/qp.org::*CODE][CODE:8]]
     primal = array(sol['x'])
     dual = array(sol['y'])
     lagrangian_eq = array(sol['y'])
     lagrangian_ineq = array(sol['z'])
     return QP_result(primal,dual,lagrangian_eq,lagrangian_ineq)
-# CODE:7 ends here
+# CODE:8 ends here
